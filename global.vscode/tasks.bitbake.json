@@ -1,0 +1,234 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            "TEMPLATECONF": "$PWD/<path_to_variant>/${config:bitbake.variant}",
+            "OE_INIT_BUILD_ENV_SH" : "sources/poky/oe-init-build-env"
+        }
+    },
+    "problemMatcher": {
+        "owner": "bitbake",
+        "fileLocation": "relative",
+        "pattern": {
+            "regexp": "^\\s*(ERROR|WARNING|NOTE):(.*)",
+            "kind": "file",
+            "severity": 1,
+            "message": 2
+        }
+    },
+    "tasks": [
+        {
+            "label": "Bitbake: Recipe Logs: List",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | grep ^T= ",
+                    " | sed -e 's/T=\\x22//' -e 's/\\x22//' ",
+                    " | while read temp_path; do find $temp_path -type l -name \"log.do_*\" ; done ",
+                    " | sed -e 's/.*log.do_//'"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Recipe Logs: Task",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | grep ^T= ",
+                    " | sed -e 's/T=\\x22//' -e 's/\\x22//' ",
+                    " | sed -e 's/$/\\/log.do_${input:recipe_task}/' ",
+                    " | xargs code -r"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Recipe: File",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | grep ^FILE= ",
+                    " | sed -e 's/FILE=\\x22//' -e 's/\\x22//' ",
+                    " | xargs code -r"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Recipe: Sources",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | grep ^S= ",
+                    " | sed -e 's/S=\\x22//' -e 's/\\x22//' ",
+                    " | xargs code"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Recipe: Environment",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | sed -e '/^#/d' -e '/^[^a-zA-Z]/d' ",
+                    " | sed -e '/^def\\s/d' -e '/^python\\s/d' ",
+                    " | sed -e '/\\(\\s*\\)\\s*{/d' ",
+                    " | sed -e '/^\\s*$/d' " // | wc -l
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Recipe: Environment (custom grep)",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e ${input:recipe_id} ",
+                    " | grep '${input:grep_line}' "
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Console: Tasks",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e",
+                    " | grep ^BB_CONSOLELOG= ",
+                    " | sed -e 's/BB_CONSOLELOG=\\x22//' -e 's/\\x22//' ",
+                    " | xargs dirname ",
+                    " | sed -e 's/$/\\/console-latest.log/' ",
+                    " | xargs cat ",
+                    " | grep 'NOTE: recipe'",
+                    " | grep -v 'Started'",
+                    " | sed -e 's/^NOTE: recipe \\(.*\\): task do_/\\1 - /'"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Console: Warnings",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e",
+                    " | grep ^BB_CONSOLELOG= ",
+                    " | sed -e 's/BB_CONSOLELOG=\\x22//' -e 's/\\x22//' ",
+                    " | xargs dirname ",
+                    " | sed -e 's/$/\\/console-latest.log/' ",
+                    " | xargs cat ",
+                    " | grep 'WARNING:'",
+                    " | sed -e 's/WARNING://'"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Console: Errors",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -e",
+                    " | grep ^BB_CONSOLELOG= ",
+                    " | sed -e 's/BB_CONSOLELOG=\\x22//' -e 's/\\x22//' ",
+                    " | xargs dirname ",
+                    " | sed -e 's/$/\\/console-latest.log/' ",
+                    " | xargs cat ",
+                    " | grep 'ERROR:'",
+                    " | sed -e 's/ERROR://'"
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Run: Recipe: Custom Task",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -c ${input:recipe_task} ${input:recipe_id} "
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Run: Recipe: Default Task",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake ${input:recipe_id} "
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Run: Recipe: Default Task (continuously)",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake --continue ${input:recipe_id} "
+                ]
+            }
+        },
+        {
+            "label": "Bitbake: Run: Recipe: Default Task (invalidate specific task)",
+            "type": "shell",
+            "linux": {
+                "command": [
+                    "source $(printenv OE_INIT_BUILD_ENV_SH) ${config:bitbake.workingFolder} > /dev/null ",
+                    "&& bitbake -C ${input:recipe_task} ${input:recipe_id} "
+                ]
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "recipe_id",
+            "type": "promptString",
+            "default": "busybox",
+            "description": "Recipe to run the execution for",
+            "password": false
+        },
+        {
+            "id": "recipe_task",
+            "type": "pickString",
+            "default": "compile",
+            "description": "Recipe's task",
+            "options": [
+                "patch",
+                "package_qa",
+                "sca_oelint_core",
+                "fetch",
+                "package_setscene",
+                "install",
+                "prepare_recipe_sysroot",
+                "unpack",
+                "packagedata",
+                "compile",
+                "configure",
+                "package_write_rpm",
+                "populate_sysroot",
+                "deploy_source_date_epoch",
+                "populate_lic",
+                "clean",
+                "cleanall"
+            ]
+        },
+        {
+            "id": "grep_line",
+            "type": "promptString",
+            "default": "^T=",
+            "description": "Line to grep for"
+        }
+    ]
+}

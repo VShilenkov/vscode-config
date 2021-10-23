@@ -1,0 +1,110 @@
+{
+                                                                   // # built-in
+                                                       // ## built-in.diffEditor
+    "diffEditor.ignoreTrimWhitespace": false,
+                                                           // ## built-in.editor
+    "editor.emptySelectionClipboard": false,
+    "editor.mouseWheelZoom"         : true,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace"       : "all",
+    "editor.rulers"                 : [
+        {
+            "column": 80,
+            "color": "#60d031"
+        },
+        {
+            "column": 120,
+            "color": "#d0c431"
+        },
+        {
+            "column": 160,
+            "color": "#d03131"
+        }
+    ],
+                                                         // ## built-in.explorer
+    "explorer.confirmDragAndDrop": false,
+    "explorer.sortOrder"         : "type",
+                                                            // ## built-in.files
+    "files.exclude": {
+        "**/.DS_Store"              : true,
+        "**/.git/objects/**"        : true,
+        "**/.hg/store/**"           : true,
+        "**/.repo/manifests.git/**" : true,
+        "**/.repo/project*/**"      : true,
+        "**/.repo/repo/**"          : true,
+        "**/.svn/subtree-cache/**"  : true,
+        "**/CVS"                    : true,
+        "**/build*/buildhistory/**" : true,
+        "**/build*/cache/**"        : true,
+        "**/build*/sstate-cache/**" : true,
+        "**/build*/tmp/**"          : true,
+        "**/node_modules/**"        : true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**"        : true,
+        "**/.git/subtree-cache/**"  : true,
+        "**/.hg/store/**"           : true,
+        "**/.repo/manifests.git/**" : true,
+        "**/.repo/project**/**"     : true,
+        "**/.repo/repo/**"          : true,
+        "**/build*/buildhistory/**" : true,
+        "**/build*/cache/**"        : true,
+        "**/build*/sstate-cache/**" : true,
+        "**/build*/tmp/**"          : true,
+        "**/node_modules/**"        : true
+    },
+                                                           // ## built-in.search
+    "search.exclude": {
+        "**/*.code-search"          : true,
+        "**/.repo/manifests.git/**" : true,
+        "**/.repo/project**/**"     : true,
+        "**/.repo/repo/**"          : true,
+        "**/bower_components"       : true,
+        "**/build*/buildhistory/**" : true,
+        "**/build*/cache/**"        : true,
+        "**/build*/sstate-cache/**" : true,
+        "**/build*/tmp/**"          : true,
+        "**/node_modules"           : true
+    },
+                                                         // ## built-in.terminal
+    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.tabs.location": "left",
+                                                        // ## built-in.workbench
+    "workbench.iconTheme"    : "vscode-icons",
+    "workbench.startupEditor": "newUntitledFile",
+                                                         // # eugenwiens.bitbake
+    "bitbake.variant" : "qemu-x86-64",
+    "bitbake.workingFolder": "build_${config:bitbake.variant}",
+    "bitbake.generateWorkingFolder": false,
+
+                                                         // # ms-vscode.cpptools
+    "C_Cpp.default.cStandard"            : "c11",
+    "C_Cpp.default.cppStandard"          : "c++14",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.compileCommands"      : "${workspaceFolder}/compile_commands.json",
+    "C_Cpp.updateChannel"                : "Insiders",
+                                                      // # ms-vscode.cmake-tools
+    "cmake.configureOnEdit"             : false,
+    "cmake.configureOnOpen"             : false,
+    "cmake.generator"                   : "Unix Makefiles",
+    "cmake.parseBuildDiagnostics"       : true,
+    "cmake.skipConfigureIfCachePresent" : true,
+                                      // # streetsidesoftware.code-spell-checker
+    "cSpell.enableFiletypes": [
+        "shellscript"
+    ],
+    "cSpell.userWords": [
+        "cmake",
+        "oeis"
+    ],
+                                                    // # james-yu.latex-workshop
+    "latex-workshop.chktex.enabled"                       : true,
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": true,
+    "latex-workshop.latex.autoClean.run"                  : "onBuilt",
+    "latex-workshop.latex.clean.subfolder.enabled"        : true,
+    "latex-workshop.latex.clean.fileTypes": [ 
+        "*.aux" 
+    ],
+    "latex-workshop.latex.outDir"                         : "%TMPDIR%",
+    "latex-workshop.view.pdf.viewer"                      : "tab"
+}
