@@ -1,0 +1,950 @@
+{
+    "section": {
+        "prefix": "section",
+        "body": "# $0 --------------------------------------------------------------------------",
+        "description": "new section separator"
+    },
+    "chapter":
+    {
+        "prefix": "chapter",
+        "body": [
+"# ---------------------------------------------------------------------------- #",
+"# $0      # ",
+"# ---------------------------------------------------------------------------- #"
+        ],
+        "description": "new chapter separator"
+    },
+    "cmake_minimum_required": {
+        "prefix": "cmake_minimum_required",
+        "body": "cmake_minimum_required(VERSION 3.${1:12}${2:...3.${3:17}} ${4:FATAL_ERROR})$0",
+        "description": "Require a minimum version of cmake."
+    },
+    "cmake_parse_arguments": {
+        "prefix": "cmake_parse_arguments",
+        "body": [
+            "cmake_parse_arguments(${1|prefix,ARGS|}",
+            "    \"${2:options}\"",
+            "    \"${3:one_value_keywords}\"",
+            "    \"${4:multi_value_keywords}\"",
+            "    ${5:\\${ARGN\\}}",
+            ")$0"
+        ],
+        "description": "Parse function or macro arguments."
+    },
+    "configure_file": {
+        "prefix": "configure_file",
+        "body": [
+            "configure_file(${1}.in",
+            "               ${1}",
+            "    ${2:COPYONLY}",
+            "    ${3:ESCAPE_QUOTES}",
+            "    ${4:@ONLY}",
+            "    ${5:NEWLINE_STYLE ${6|UNIX,DOS,WIN32,LF,CRLF|}}",
+            ")$0"
+        ],
+        "description": "Copy a file to another location and modify its contents."
+    },
+    "execute_process": {
+        "prefix": [
+            "execute_process",
+            "ep"
+        ],
+        "body": [
+            "execute_process(COMMAND ${1:\\${CMAKE_COMMAND\\}} ${2:args}",
+            "    ${3:COMMAND ${4:\\${CMAKE_COMMAND\\}} ${5:args} }",
+            "    ${6:WORKING_DIRECTORY ${7:directory}}",
+            "    ${8:TIMEOUT ${9:seconds}}",
+            "    ${10:RESULT_VARIABLE ${11:variable}}",
+            "    ${12:RESULTS_VARIABLE ${13:variable}}",
+            "    ${14:OUTPUT_VARIABLE ${15:variable}}",
+            "    ${16:ERROR_VARIABLE ${17:variable}}",
+            "    ${18:INPUT_FILE ${19:file}}",
+            "    ${20:OUTPUT_FILE ${21:file}}",
+            "    ${22:ERROR_FILE ${23:file}}",
+            "    ${24:OUTPUT_QUIET}",
+            "    ${25:ERROR_QUIET}",
+            "    ${26:COMMAND_ECHO ${27|STDERR,STDOUT,NONE|}}",
+            "    ${28:OUTPUT_STRIP_TRAILING_WHITESPACE}",
+            "    ${29:ERROR_STRIP_TRAILING_WHITESPACE}",
+            "    ${30:ENCODING ${31|NONE,AUTO,ANSI,OEM,UTF8,UTF-8|}}",
+            ")$0"
+        ],
+        "description": "Runs the given sequence of one or more commands."
+    },
+    "file_read": {
+        "prefix": [
+            "file_read"
+        ],
+        "body": [
+            "file(READ ${1:filename} ${2:variable}",
+            "    ${3:OFFSET ${4:offset}}",
+            "    ${5:LIMIT ${6:max-in}}",
+            "    ${7:HEX}",
+            ")$0"
+        ],
+        "description": "Read content from a file called <filename> and store it in a <variable>."
+    },
+    "file_strings": {
+        "prefix": "file_strings",
+        "body": [
+            "file(STRINGS ${1:filename} ${2:variable}",
+            "    ${3:LENGTH_MAXIMUM ${4:max-len}}",
+            "    ${5:LENGTH_MINIMUM ${6:min-len}}",
+            "    ${7:LIMIT_COUNT ${8:max-num}}",
+            "    ${9:LIMIT_INPUT ${10:max-in}}",
+            "    ${11:LIMIT_OUTPUT ${12:max-out}}",
+            "    ${13:NEWLINE_CONSUME}",
+            "    ${14:NO_HEX_CONVERSION}",
+            "    ${15:REGEX ${16:regex}}",
+            "    ${17:ENCODING ${18|UTF-8,UTF-16LE,UTF-16BE,UTF-32LE,UTF-32BE|}}",
+            ")$0"
+        ],
+        "description": "Parse a list of ASCII strings from <filename> and store it in <variable>"
+    },
+    "file_hash": {
+        "prefix": "file_hash",
+        "body": "file(${1|MD5,SHA1,SHA224,SHA256,SHA384,SHA512,SHA3_224,SHA3_256,SHA3_384,SHA3_512|} ${2:filename} ${3:variable})",
+        "description": "Compute a cryptographic hash of the content of <filename> and store it in a <variable>."
+    },
+    "file_timestamp": {
+        "prefix": "file_timestamp",
+        "body": [
+            "file(TIMESTAMP ${1:filename} ${2:variable}",
+            "    ${3:format} ${4:UTC}",
+            ")$0"
+        ],
+        "description": "Compute a string representation of the modification time of <filename> and store it in <variable>."
+    },
+    "file_get_runtime_deps": {
+        "prefix": "file_get_runtime_deps",
+        "body": [
+            "file(GET_RUNTIME_DEPENDENCIES",
+            "    ${1:RESOLVED_DEPENDENCIES_VAR ${2:deps_var}}",
+            "    ${3:UNRESOLVED_DEPENDENCIES_VAR ${4:unresolved_deps_var}}",
+            "    ${5:CONFLICTING_DEPENDENCIES_PREFIX ${6:conflicting_deps_prefix}}",
+            "    ${7:EXECUTABLES ${8:executable_files}}",
+            "    ${9:LIBRARIES ${10:library_files}}",
+            "    ${11:MODULES ${12:module_files}}",
+            "    ${13:DIRECTORIES ${14:directories}}",
+            "    ${15:BUNDLE_EXECUTABLE ${16:bundle_executable_file}}",
+            "    ${17:PRE_INCLUDE_REGEXES ${18:regexes}}",
+            "    ${19:PRE_EXCLUDE_REGEXES ${20:regexes}}",
+            "    ${21:POST_INCLUDE_REGEXES ${22:regexes}}",
+            "    ${23:POST_EXCLUDE_REGEXES ${24:regexes}}",
+            ")$0"
+        ],
+        "description": "Recursively get the list of libraries depended on by the given files."
+    },
+    "file_write": {
+        "prefix": "file_write",
+        "body": "file(WRITE ${1:filename} ${2:content})$0",
+        "description": "Write <content> into a file called <filename>."
+    },
+    "file_append": {
+        "prefix": "file_append",
+        "body": "file(APPEND ${1:filename} ${2:content})$0",
+        "description": "Append <content> into a file called <filename>."
+    },
+    "file_touch": {
+        "prefix": "file_touch",
+        "body": "file(TOUCH ${1:files})",
+        "description": "Create a file with no content if it does not yet exist."
+    },
+    "file_touch_nocreate": {
+        "prefix": "file_touch_nocreate",
+        "body": "file(TOUCH_NOCREATE ${1:files})$0",
+        "description": "Touch a file if it exists but not create it."
+    },
+    "file_generate_output": {
+        "prefix": "file_generate_output",
+        "body": [
+            "file(GENERATE OUTPUT ${1:output-file}",
+            "    ${2|INPUT input-file,CONTENT content|}",
+            "    CONDITION ${4:expression}",
+            ")$0"
+        ],
+        "description": "Generate an output file for each build configuration supported by the current CMake Generator."
+    },
+    "file_glob": {
+        "prefix": "file_glob",
+        "body": [
+            "file(GLOB            ${1:variable}",
+            "    ${2:LIST_DIRECTORIES ${3|true,false|}}",
+            "    ${4:RELATIVE         ${5:path}}",
+            "    ${6:CONFIGURE_DEPENDS}",
+            "    ${7:globbing-expressions}",
+            ")$0"
+        ],
+        "description": "Generate a list of files that match the <globbing-expressions> and store it into the <variable>."
+    },
+    "file_glob_recurse": {
+        "prefix": "file_glob_recurse",
+        "body": [
+            "file(GLOB_RECURSE    ${1:variable}",
+            "    ${2:FOLLOW_SYMLINKS}",
+            "    ${3:LIST_DIRECTORIES ${4|true,false|}}",
+            "    ${5:RELATIVE         ${6:path}}",
+            "    ${7:CONFIGURE_DEPENDS}",
+            "    ${8:globbing-expressions}",
+            ")$0"
+        ],
+        "description": "Generate a list of files that match the <globbing-expressions> and store it into the <variable>."
+    },
+    "file_rename": {
+        "prefix": "file_rename",
+        "body": "file(RENAME ${1:oldname} ${2:newname})$0",
+        "description": "Move a file or directory within a filesystem from <oldname> to <newname>, replacing the destination atomically."
+    },
+    "file_remove": {
+        "prefix": "file_remove",
+        "body": "file(REMOVE ${1:files})$0",
+        "description": "Remove the given files."
+    },
+    "file_remove_recurse": {
+        "prefix": "file_remove_recurse",
+        "body": "file(REMOVE_RECURSE ${1:files})$0",
+        "description": "Remove the given files and directories, also non-empty directories."
+    },
+    "file_make_directory": {
+        "prefix": "file_make_directory",
+        "body": "file(MAKE_DIRECTORY ${1:directories})$0",
+        "description": "Create the given directories and their parents as needed."
+    },
+    "file_copy": {
+        "prefix": ["file_copy","file_install"],
+        "body": [
+            "file(${1|COPY,INSTALL|} ${2:files} DESTINATION ${3:dir}",
+            "    ${4:FILE_PERMISSIONS ${5:permissions}}",
+            "    ${6:DIRECTORY_PERMISSIONS ${7:permissions}}",
+            "    ${8:NO_SOURCE_PERMISSIONS}",
+            "    ${9:USE_SOURCE_PERMISSIONS}",
+            "    ${10:FOLLOW_SYMLINK_CHAIN}",
+            "    ${11:FILES_MATCHING}",
+            "    ${12:${13|PATTERN pattern,REGEX regex|} ${14:EXCLUDE} ${15:PERMISSIONS ${16:permissions}}}",
+            ")$0"
+        ],
+        "description": "The COPY signature copies files, directories, and symlinks to a destination folder."
+    },
+    "file_size": {
+        "prefix": "file_size",
+        "body": "file(SIZE ${1:filename} ${2:variable})",
+        "description": "Determine the file size of the <filename> and put the result in <variable> variable."
+    },
+    "file_read_symlink": {
+        "prefix": "file_read_symlink",
+        "body": "file(READ_SYMLINK ${1:linkname} ${2:variable})$0",
+        "description": "This subcommand queries the symlink <linkname> and stores the path it points to in the result <variable>."
+    },
+    "file_create_link":{
+        "prefix": "file_create_link",
+        "body": [
+            "file(CREATE_LINK ${1:original} ${2:linkname}",
+            "    ${3:RESULT ${4:result}}",
+            "    ${5:COPY_ON_ERROR}",
+            "    ${6:SYMBOLIC}",
+            ")$0"
+        ],
+        "description": "Create a link <linkname> that points to <original>."
+    },
+    "file_relative_path":{
+        "prefix": "file_relative_path",
+        "body": "file(RELATIVE_PATH ${1:variable} ${2:directory} ${3:file})$0",
+        "description": "Compute the relative path from a <directory> to a <file> and store it in the <variable>."
+    },
+    "file_to_cmake_path":{
+        "prefix": "file_to_cmake_path",
+        "body": "file(TO_CMAKE_PATH \"${1:path}\" ${2:variable})$0",
+        "description": "The TO_CMAKE_PATH mode converts a native <path> into a cmake-style path with forward-slashes (/)."
+    },
+    "file_to_native_path":{
+        "prefix": "file_to_native_path",
+        "body": "file(TO_NATIVE_PATH \"${1:path}\" ${2:variable})$0",
+        "description": "The TO_NATIVE_PATH mode converts a cmake-style <path> into a native path with platform-specific slashes."
+    },
+    "file_download":{
+        "prefix": "file_download",
+        "body": [
+            "file(DOWNLOAD ${1:url} ${2:file}",
+            "    ${3:INACTIVITY_TIMEOUT ${4:seconds}}",
+            "    ${5:LOG ${6:variable}}",
+            "    ${7:SHOW_PROGRESS}", 
+            "    ${8:STATUS ${9:variable}}",
+            "    ${10:TIMEOUT ${11:seconds}}",
+            "    ${12:USERPWD ${13:username}:${14:password}}",
+            "    ${15:HTTPHEADER ${16:HTTP-header}}",
+            "    ${17:NETRC ${18|IGNORED,OPTIONAL,REQUIRED|}}",
+            "    ${19:NETRC_FILE ${20:file}}",
+            "    ${21:EXPECTED_HASH ALGO=${22|MD5,SHA1,SHA224,SHA256,SHA384,SHA512,SHA3_224,SHA3_256,SHA3_384,SHA3_512|}}",
+            "    ${23:EXPECTED_MD5 ${24:value}}", 
+            "    ${25:TLS_VERIFY ${26|ON,OFF|}}",
+            "    ${27:TLS_CAINFO ${28:file}}",
+            ")$0"
+        ],
+        "description": "The DOWNLOAD mode downloads the given <url> to a local <file>."
+    },
+    "file_upload":{
+        "prefix": "file_upload",
+        "body": [
+            "file(UPLOAD ${1:file} ${2:url}",
+            "    ${3:INACTIVITY_TIMEOUT ${4:seconds}}",
+            "    ${5:LOG ${6:variable}}",
+            "    ${7:SHOW_PROGRESS}", 
+            "    ${8:STATUS ${9:variable}}",
+            "    ${10:TIMEOUT ${11:seconds}}",
+            "    ${12:USERPWD ${13:username}:${14:password}}",
+            "    ${15:HTTPHEADER ${16:HTTP-header}}",
+            "    ${17:NETRC ${18|IGNORED,OPTIONAL,REQUIRED|}}",
+            "    ${19:NETRC_FILE ${20:file}}",
+            "    ${21:EXPECTED_HASH ALGO=${22|MD5,SHA1,SHA224,SHA256,SHA384,SHA512,SHA3_224,SHA3_256,SHA3_384,SHA3_512|}}",
+            "    ${23:EXPECTED_MD5 ${24:value}}", 
+            "    ${25:TLS_VERIFY ${26|ON,OFF|}}",
+            "    ${27:TLS_CAINFO ${28:file}}",
+            ")$0"
+        ],
+        "description": "The UPLOAD mode uploads a local <file> to a given <url>."
+    },
+    "file_lock":{
+        "prefix": "file_lock",
+        "body": [
+            "file(LOCK ${1:path}",
+            "    ${2:DIRECTORY}",
+            "    ${3:RELEASE}",
+            "    ${4:GUARD ${5|FUNCTION,FILE,PROCESS|}}",
+            "    ${6:RESULT_VARIABLE ${7:variable}}",
+            "    ${8:TIMEOUT ${9:seconds}}",
+            ")$0"
+        ],
+        "description": "Lock a file specified by <path> if no DIRECTORY option present and file <path>/cmake.lock otherwise."
+    },
+    "find_file": {
+        "prefix": "find_file",
+        "body": "find_file(${1:VAR} ${2:name1} ${3:path1})$0",
+        "description": "This command is used to find a full path to named file."
+    },
+    "find_file_full":{
+        "prefix": "find_file_full",
+        "body": [
+            "find_file(${1:VAR} ${2|name,NAMES name1 name2|}",
+            "    ${3:HINTS ${4:path1} ${5:ENV ${6:var}}}",
+            "    ${7:PATHS ${8:path1} ${9:ENV ${10:var}}}",
+            "    ${11:PATH_SUFFIXES ${12:suffix1}}",
+            "    ${13:DOC \"${14:cache documentation string}\"}",
+            "    ${15:NO_DEFAULT_PATH}",
+            "    ${16:NO_PACKAGE_ROOT_PATH}",
+            "    ${17:NO_CMAKE_PATH}",
+            "    ${18:NO_CMAKE_ENVIRONMENT_PATH}",
+            "    ${19:NO_SYSTEM_ENVIRONMENT_PATH}",
+            "    ${20:NO_CMAKE_SYSTEM_PATH}",
+            "    ${21|CMAKE_FIND_ROOT_PATH_BOTH,ONLY_CMAKE_FIND_ROOT_PATH,NO_CMAKE_FIND_ROOT_PATH|}",
+            ")$0"
+        ],
+        "description": "This command is used to find a full path to named file."
+    },
+    "find_library":{
+        "prefix": "find_library",
+        "body": "find_library(${1:VAR} ${2:name1} ${3:path1})$0",
+        "description": "This command is used to find a library."
+    },
+    "find_library_full":{
+        "prefix": "find_library_full",
+        "body": [
+            "find_library(${1:VAR} ${2|name,NAMES name1 name2,NAMES name1 name2 NAMES_PER_DIR|}",
+            "    ${3:HINTS ${4:path1} ${5:ENV ${6:var}}}",
+            "    ${7:PATHS ${8:path1} ${9:ENV ${10:var}}}",
+            "    ${11:PATH_SUFFIXES ${12:suffix1}}",
+            "    ${13:DOC \"${14:cache documentation string}\"}",
+            "    ${15:NO_DEFAULT_PATH}",
+            "    ${16:NO_PACKAGE_ROOT_PATH}",
+            "    ${17:NO_CMAKE_PATH}",
+            "    ${18:NO_CMAKE_ENVIRONMENT_PATH}",
+            "    ${19:NO_SYSTEM_ENVIRONMENT_PATH}",
+            "    ${20:NO_CMAKE_SYSTEM_PATH}",
+            "    ${21|CMAKE_FIND_ROOT_PATH_BOTH,ONLY_CMAKE_FIND_ROOT_PATH,NO_CMAKE_FIND_ROOT_PATH|}",
+            ")$0"
+        ],
+        "description": "This command is used to find a library."
+    },
+    "find_package":{
+        "prefix": "find_package",
+        "body": [
+            "find_package(${1:PackageName} ${2:version}",
+            "    ${3:EXACT}",
+            "    ${4:QUIET}",
+            "    ${5:MODULE}",
+            "    ${6:REQUIRED}",
+            "    ${7:${8:COMPONENTS} ${9:components}}",
+            "    ${10:OPTIONAL_COMPONENTS ${11:components}}",
+            "    ${12:NO_POLICY_SCOPE}",
+            ")$0"
+        ],
+        "description": "Find an external project, and load its settings."
+    },
+    "find_package_full":{
+        "prefix": "find_package_full",
+        "body": [
+            "find_package(${1:PackageName} ${2:version}",
+            "    ${3:EXACT}",
+            "    ${4:QUIET}",
+            "    ${5:REQUIRED}",
+            "    ${6:${7:COMPONENTS} ${8:components}}",
+            "    ${9:OPTIONAL_COMPONENTS ${10:components}}",
+            "    ${11|CONFIG,NO_MODULE|}",
+            "    ${12:NO_POLICY_SCOPE}",
+            "    ${13:NAMES ${14:name}}",
+            "    ${15:CONFIGS ${16:config}}",
+            "    ${17:HINTS ${18:path}}",
+            "    ${19:PATHS ${20:path}}",
+            "    ${21:PATH_SUFFIXES ${22:suffix}}",
+            "    ${23:NO_DEFAULT_PATH}",
+            "    ${24:NO_PACKAGE_ROOT_PATH}",
+            "    ${25:NO_CMAKE_PATH}",
+            "    ${26:NO_CMAKE_ENVIRONMENT_PATH}",
+            "    ${27:NO_SYSTEM_ENVIRONMENT_PATH}",
+            "    ${28:NO_CMAKE_PACKAGE_REGISTRY}",
+            "    ${29:NO_CMAKE_SYSTEM_PATH}",
+            "    ${30:NO_CMAKE_SYSTEM_PACKAGE_REGISTRY}",
+            "    ${31|CMAKE_FIND_ROOT_PATH_BOTH,ONLY_CMAKE_FIND_ROOT_PATH,NO_CMAKE_FIND_ROOT_PATH|}",
+            ")$0"
+        ],
+        "description": "Find an external project, and load its settings."
+    },
+    "find_path": {
+        "prefix": "find_path",
+        "body": "find_path(${1:VAR} ${2:name} ${3:path})$0",
+        "description": "This command is used to find a directory containing the named file."
+    },
+    "find_path_full": {
+        "prefix": "find_path_full",
+        "body": [
+            "find_path(${1:VAR} ${2|name,NAMES name1 name2|}",
+            "    ${3:HINTS ${4:path ${5:ENV ${6:var}}}}",
+            "    ${7:PATHS ${8:path ${9:ENV ${10:var}}}}",
+            "    ${11:PATH_SUFFIXES ${12:suffix}}",
+            "    ${13:DOC \"${14:cache documentation string}\"}",
+            "    ${15:NO_DEFAULT_PATH}",
+            "    ${16:NO_PACKAGE_ROOT_PATH}",
+            "    ${17:NO_CMAKE_PATH}",
+            "    ${18:NO_CMAKE_ENVIRONMENT_PATH}",
+            "    ${19:NO_SYSTEM_ENVIRONMENT_PATH}",
+            "    ${20:NO_CMAKE_SYSTEM_PATH}",
+            "    ${21|CMAKE_FIND_ROOT_PATH_BOTH,ONLY_CMAKE_FIND_ROOT_PATH,NO_CMAKE_FIND_ROOT_PATH|}",
+            ")$0"
+        ],
+        "description": "This command is used to find a directory containing the named file."
+    },
+    "find_program":{
+        "prefix": "find_program",
+        "body": "find_program(${1:VAR} ${2:name1} ${3:path1})$0",
+        "description": "This command is used to find a program."
+    },
+    "find_program_full":{
+        "prefix": "find_program_full",
+        "body": [
+            "find_program(${1:VAR} ${2|name,NAMES name1 name2,NAMES name1 name2 NAMES_PER_DIR|}",
+            "    ${3:HINTS ${4:path1} ${5:ENV ${6:var}}}",
+            "    ${7:PATHS ${8:path1} ${9:ENV ${10:var}}}",
+            "    ${11:PATH_SUFFIXES ${12:suffix1}}",
+            "    ${13:DOC \"${14:cache documentation string}\"}",
+            "    ${15:NO_DEFAULT_PATH}",
+            "    ${16:NO_PACKAGE_ROOT_PATH}",
+            "    ${17:NO_CMAKE_PATH}",
+            "    ${18:NO_CMAKE_ENVIRONMENT_PATH}",
+            "    ${19:NO_SYSTEM_ENVIRONMENT_PATH}",
+            "    ${20:NO_CMAKE_SYSTEM_PATH}",
+            "    ${21|CMAKE_FIND_ROOT_PATH_BOTH,ONLY_CMAKE_FIND_ROOT_PATH,NO_CMAKE_FIND_ROOT_PATH|}",
+            ")$0"
+        ],
+        "description": "This command is used to find a program."
+    },
+    "foreach":{
+        "prefix": "foreach",
+        "body": [
+            "foreach(${1:loop_var} ${2:items})",
+            "    $0",
+            "endforeach()"
+        ],
+        "description": "Evaluate a group of commands for each value in a list."
+    },
+    "foreach_end":{
+        "prefix": "foreach_end",
+        "body": [
+            "foreach(${1:loop_var} RANGE ${2:stop})",
+            "    $0",
+            "endforeach()"
+        ],
+        "description": "foreach iterates over the numbers 0, 1, … up to (and including) the nonnegative integer <stop>."
+    },
+    "foreach_begin_end":{
+        "prefix": "foreach_begin_end",
+        "body": [
+            "foreach(${1:loop_var} RANGE ${2:start} ${3:stop} ${4:step})",
+            "    $0",
+            "endforeach()"
+        ],
+        "description": "foreach iterates over the numbers from <start> up to at most <stop> in steps of <step>."
+    },
+    "foreach_in":{
+        "prefix": "foreach_in",
+        "body": [
+            "foreach(${1:loop_var} IN ${2|LISTS lists,ITEMS items|})",
+            "    $0",
+            "endforeach()"
+        ],
+        "description": "The foreach command iterates over each item in each given list."
+    },
+    "foreach_zip":{
+        "prefix": "foreach_zip",
+        "body": [
+            "foreach(${1:loop_var1} ${2:loop_var2} IN ZIP_LISTS ${3:lists})",
+            "    $0",
+            "endforeach()"
+        ],
+        "description": "The foreach command iterates over each item in each given list."
+    },
+    "function":{
+        "prefix": "function",
+        "body": [
+            "function(${1:name} ${2:arg})",
+            "    $0",
+            "endfunction()"
+        ],
+        "description": "Start recording a function for later invocation as a command."
+    },
+    "get_cmake_property":{
+        "prefix": "get_cmake_property",
+        "body": "get_cmake_property(${1:var} ${2:property})$0",
+        "description": "Get a global property of the CMake instance."
+    },
+    "get_directory_property":{
+        "prefix": "get_directory_property",
+        "body": "get_directory_property(${1:variable} ${2:DIRECTORY ${3:dir}} ${4:prop-name})$0",
+        "description": "Get a property of DIRECTORY scope."
+    },
+    "get_directory_property_definition":{
+        "prefix": "get_directory_property_definition",
+        "body": "get_directory_property(${1:variable} ${2:DIRECTORY ${3:dir}} DEFINITION ${4:var-name})$0",
+        "description": "Get a variable definition from a directory."
+    },
+    "get_property":{
+        "prefix": "get_property",
+        "body": [
+            "get_property(${1:variable}",
+            "    ${2|GLOBAL,DIRECTORY dir,TARGET target,SOURCE source,INSTALL file,TEST test,CACHE entry,VARIABLE|}",
+            "    PROPERTY ${3:name}",
+            "    ${4:${5|SET,DEFINED,BRIEF_DOCS,FULL_DOCS|}}",
+            ")$0"
+        ],
+        "description": "Get a property."
+    },
+    "if":{
+        "prefix": "if",
+        "body": [
+            "if(${1:condition})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Conditionally execute a group of commands."
+    },
+    "ifelse":{
+        "prefix": "ifelse",
+        "body": [
+            "if(${1:condition})",
+            "    $0",
+            "else()",
+            "endif()"
+        ],
+        "description": "Conditionally execute a group of commands."
+    },
+    "ifelseif":{
+        "prefix": "ifelseif",
+        "body": [
+            "if(${1:condition})",
+            "    $0",
+            "elseif(${2:condition})",
+            "endif()"
+        ],
+        "description": "Conditionally execute a group of commands."
+    },
+    "ifelseifelse":{
+        "prefix": "ifelseifelse",
+        "body": [
+            "if(${1:condition})",
+            "    $0",
+            "elseif(${2:condition})",
+            "else()",
+            "endif()"
+        ],
+        "description": "Conditionally execute a group of commands."
+    },
+    "iftrue":{
+        "prefix": "iftrue",
+        "body": [
+            "if(${1|1,ON,YES,TRUE,Y|})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True"
+    },
+    "iffalse":{
+        "prefix": "iffalse",
+        "body": [
+            "if(${1|0,OFF,NO,FALSE,N,IGNORE,NOTFOUND|})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "False"
+    },
+    "ifvariable":{
+        "prefix": "ifvariable",
+        "body": [
+            "if(${1:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if given a variable that is defined to a value that is not a false constant. False otherwise."
+    },
+    "ifnot":{
+        "prefix": "ifnot",
+        "body": [
+            "if(NOT ${1:condition})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the condition is not true."
+    },
+    "ifand":{
+        "prefix": "ifand",
+        "body": [
+            "if((${1:condition}) AND (${2:condition}))",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if both conditions would be considered true individually."
+    },
+    "ifor":{
+        "prefix": "ifor",
+        "body": [
+            "if((${1:condition}) OR (${2:condition}))",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if either condition would be considered true individually."
+    },
+    "ifcommand":{
+        "prefix": "ifcommand",
+        "body": [
+            "if(COMMAND ${1:command-name})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is a command, macro or function that can be invoked."
+    },
+    "ifpolicy":{
+        "prefix": "ifpolicy",
+        "body": [
+            "if(POLICY ${1:policy-id})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is an existing policy (of the form CMP<NNNN>)."
+    },
+    "iftarget":{
+        "prefix": "iftarget",
+        "body": [
+            "if(TARGET ${1:target-name})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is an existing logical target name."
+    },
+    "iftest":{
+        "prefix": "iftest",
+        "body": [
+            "if(TEST ${1:test-name})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is an existing test name created by the add_test() command."
+    },
+    "ifexists":{
+        "prefix": "ifexists",
+        "body": [
+            "if(EXISTS ${1:path-to-file-or-directory})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the named file or directory exists."
+    },
+    "ifisnewer":{
+        "prefix": "ifisnewer",
+        "body": [
+            "if(${1:file1} IS_NEWER_THAN ${2:file2})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if file1 is newer than file2 or if one of the two files doesn’t exist."
+    },
+    "ifisdirectory":{
+        "prefix": "ifisdirectory",
+        "body": [
+            "if(IS_DIRECTORY ${1:path-to-directory})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is a directory."
+    },
+    "ifissymlink":{
+        "prefix": "ifissymlink",
+        "body": [
+            "if(IS_SYMLINK ${1:file-name})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given name is a symbolic link."
+    },
+    "ifisabsolute":{
+        "prefix": "ifisabsolute",
+        "body": [
+            "if(IS_ABSOLUTE ${1:path})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given path is an absolute path."
+    },
+    "ifmatches":{
+        "prefix": "ifmatches",
+        "body": [
+            "if(${1:variable} MATCHES ${2:regex})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value matches the given regular condition."
+    },
+    "ifless":{
+        "prefix": "ifless",
+        "body": [
+            "if(${1:variable} LESS ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is a valid number and less than that on the right."
+    },
+    "ifgreater":{
+        "prefix": "ifgreater",
+        "body": [
+            "if(${1:variable} GREATER ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is a valid number and greater than that on the right."
+    },
+    "ifequal":{
+        "prefix": "ifequal",
+        "body": [
+            "if(${1:variable} EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is a valid number and equal to that on the right."
+    },
+    "iflessequal":{
+        "prefix": "iflessequal",
+        "body": [
+            "if(${1:variable} LESS_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is a valid number and less than or equal to that on the right."
+    },
+    "ifgreaterequal":{
+        "prefix": "ifgreaterequal",
+        "body": [
+            "if(${1:variable} GREATER_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is a valid number and greater than or equal to that on the right."
+    },
+    "ifstrless":{
+        "prefix": "ifstrless",
+        "body": [
+            "if(${1:variable} STRLESS ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is lexicographically less than the string or variable on the right."
+    },
+    "ifstrgreater":{
+        "prefix": "ifstrgreater",
+        "body": [
+            "if(${1:variable} STRGREATER ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is lexicographically greater than the string or variable on the right."
+    },
+    "ifstrequal":{
+        "prefix": "ifstrequal",
+        "body": [
+            "if(${1:variable} STREQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is lexicographically equal to the string or variable on the right."
+    },
+    "ifstrlessequal":{
+        "prefix": "ifstrlessequal",
+        "body": [
+            "if(${1:variable} STRLESS_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is lexicographically less than or equal to the string or variable on the right."
+    },
+    "ifstrgreaterequal":{
+        "prefix": "ifstrgreaterequal",
+        "body": [
+            "if(${1:variable} STRGREATER_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given string or variable’s value is lexicographically greater than or equal to the string or variable on the right."
+    },
+    "ifversionless":{
+        "prefix": "ifversionless",
+        "body": [
+            "if(${1:variable} VERSION_LESS ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Component-wise integer version number comparison."
+    },
+    "ifversiongreater":{
+        "prefix": "ifversiongreater",
+        "body": [
+            "if(${1:variable} VERSION_GREATER ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Component-wise integer version number comparison."
+    },
+    "ifversionequal":{
+        "prefix": "ifversionequal",
+        "body": [
+            "if(${1:variable} VERSION_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Component-wise integer version number comparison."
+    },
+    "ifversionlessequal":{
+        "prefix": "ifversionlessequal",
+        "body": [
+            "if(${1:variable} VERSION_LESS_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Component-wise integer version number comparison."
+    },
+    "ifversionreaterequal":{
+        "prefix": "ifversionreaterequal",
+        "body": [
+            "if(${1:variable} VERSION_GREATER_EQUAL ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "Component-wise integer version number comparison."
+    },
+    "ifinlist":{
+        "prefix": "ifinlist",
+        "body": [
+            "if(${1:variable} IN_LIST ${2:variable})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if the given element is contained in the named list variable."
+    },
+    "ifdefined":{
+        "prefix": "ifdefined",
+        "body": [
+            "if(DEFINED ${2|name,CACHE{name},ENV{name}|})",
+            "    $0",
+            "endif()"
+        ],
+        "description": "True if a variable, cache variable or environment variable with given <name> is defined."
+    },
+    "include":{
+        "prefix": "include",
+        "body": [
+            "include(${1:file_or_module} ${2:OPTIONAL} ${3:RESULT_VARIABLE ${4:var}} ${5:NO_POLICY_SCOPE})$0"
+        ],
+        "description": "Load and run CMake code from a file or module."
+    },
+    "includeguard":{
+        "prefix": "includeguard",
+        "body": "include_guard(${1:${2|DIRECTORY,GLOBAL|}})$0",
+        "description": "includeguard"
+    },
+    "listlength":{
+        "prefix": "listlength",
+        "body": "list(LENGTH ${1:list} ${2:output_variable})$0",
+        "description": "Returns the list’s length."
+    },
+    "listget":{
+        "prefix": "listget",
+        "body": "list(GET ${1:list} ${2:element_index} ${5:output_variable})$0",
+        "description": "Returns the list of elements specified by indices from the list."
+    },
+    "listjoin":{
+        "prefix": "listjoin",
+        "body": "list(JOIN ${1:list} ${2:glue} ${3:output_variable})$0",
+        "description": "Returns a string joining all list’s elements using the glue string."
+    },
+    "listsublist":{
+        "prefix": "listsublist",
+        "body": "list(SUBLIST ${1:list} ${2:begin} ${3:length} ${4:output_variable})$0",
+        "description": "Returns a sublist of the given list."
+    },
+    "listfind":{
+        "prefix": "listfind",
+        "body": "list(FIND ${1:list} ${2:value} ${3:output_variable})$0",
+        "description": "Returns the index of the element specified in the list or -1 if it wasn’t found."
+    },
+    "listappend":{
+        "prefix": "listappend",
+        "body": "list(APPEND ${1:list} ${2:element})$0",
+        "description": "Appends elements to the list."
+    },
+    "listfilter":{
+        "prefix": "listfilter",
+        "body": "list(FILTER ${1:list} ${2|INCLUDE,EXCLUDE|} REGEX \"${3:regular_expression}\")$0",
+        "description": "listfilter"
+    },
+    "listinsert":{
+        "prefix": "listinsert",
+        "body": "list(INSERT ${1:list} ${2:element_index} ${3:element})$0",
+        "description": "Inserts elements to the list to the specified location."
+    },
+    "listpopback":{
+        "prefix": "listpopback",
+        "body": "list(POP_BACK ${1:list} ${2:out_var})$0",
+        "description": "If no variable name is given, removes exactly one element. Otherwise, assign the last element’s value to the given variable and removes it, up to the last variable name given."
+    },
+    "listpopfront":{
+        "prefix": "listpopfront",
+        "body": "list(POP_FRONT ${1:list} ${2:out_var})$0",
+        "description": "If no variable name is given, removes exactly one element. Otherwise, assign the first element’s value to the given variable and removes it, up to the last variable name given."
+    },
+    "project":{
+        "prefix": "project",
+        "body": [
+            "project(${1:PROJECT-NAME}",
+            "    ${2:VERSION       ${3:major}${4:.${5:minor}${6:.${7:patch}${8:.${9:tweak}}}}}",
+            "    ${10:DESCRIPTION  \"${11:project-description-string}\"}",
+            "    ${12:HOMEPAGE_URL \"${13:url-string}\"}",
+            "    ${14:LANGUAGES    ${15|C,CPP,FORTRAN,CUDA,NONE|}}",
+            ")"
+        ],
+        "description": "Set the name of the project."
+    }
+}
