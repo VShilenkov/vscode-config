@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: Delete Build Folder",
+            "type": "shell",
+            "command": "cmake -E rm -R ${command:cmake.buildDirectory}/.cmake ${command:cmake.buildDirectory}",
+            "presentation": {
+                "reveal": "silent",
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}
