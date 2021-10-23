@@ -1,0 +1,28 @@
+{
+    "cmake.cmakePath"     : "${workspaceFolder}/.vscode/cmake_${command:cmake.buildKit}",
+    "cmake.buildDirectory": "${workspaceFolder}/build_${buildKit}/${buildType}",
+
+    "cmake.configureArgs": [
+//        "--debug-find"
+    ],
+    "cmake.configureSettings": {
+        "CMAKE_VERBOSE_MAKEFILE": "false",
+        "ENGINEERING_BUILD"     : "false",
+        "WITH_UNIT_TEST"        : "false",
+        "WITH_COVERAGE"         : "false",
+        "WITH_IWYU"             : "false",
+        "WITH_CLANG_TIDY"       : "false",
+        "WITH_CPPCHECK"         : "false"
+    },
+
+    "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+
+    "cmake.enabledOutputParsers": [
+        "cmake",
+        "gcc",
+        "gnuld",
+//        "msvc",
+//        "ghs",
+//        "diab"
+    ],
+}
